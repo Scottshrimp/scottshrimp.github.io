@@ -74,6 +74,7 @@ html{
       position: absolute;
       opacity: 0;
       animation: slideIn 1.5s cubic-bezier(.73,-0.01,.23,1) forwards;
+      animation-delay: 0.65s;
     }
 
     .chair {
