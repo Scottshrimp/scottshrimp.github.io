@@ -17,7 +17,12 @@
 
   <!-- 页面主体 -->
   <div class="content">
-    <img src="assets/greeting DAY.png" alt="Greeting Text" class="greeting" onanimationend="document.querySelector('.chair').style.display = 'block'" />
+    <h1 class="greeting-text">Good morning</h1>
     <img src="assets/chair.png" alt="Chair Image" class="chair" />
   </div>
+  <script>
+  document.querySelector('.greeting-text').addEventListener('animationend', () => {
+    document.querySelector('.chair').style.display = 'block';
+  });
+</script>
 </body>

@@ -1,4 +1,16 @@
+html{
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
 
+@font-face {
+  font-family: 'MP';
+  src: url('assets/fonts/MyriadPro/MPregular.woff2') format('woff2'),
+       url('assets/fonts/MyriadPro/MPregular.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
     body {
       margin: 0;
       background-color: #e3dfd5;
@@ -30,30 +42,35 @@
       height: 100vh;
     }
 
-    .greeting {
+    .greeting{
+      opacity: 0;
+    }
+
+    .greeting-text {
+      font-family: 'MP', sans-serif;
+      font-weight: 300;
+      font-size: 8rem;
+      margin-top: 34vh;
+      margin-left: 3vw;
       position: absolute;
-      top: 15%;
-      left: -37.5%;
       opacity: 0;
       animation: slideIn 1.5s cubic-bezier(.73,-0.01,.23,1) forwards;
     }
 
     .chair {
-        transform: scale(0.55);
       position: absolute;
-      right: -10%;
-      top: 5%;
+      transform: scale(0.55);
+      bottom: -24vh;
+      right: -11vw;
       display: none;
     }
 
     @keyframes slideIn {
       0% {
-        scale: 0.5;
         opacity: 0;
         transform: translateX(300px);
       }
       100% {
-        scale: 0.5;
         opacity: 1;
         transform: translateX(0);
       }
