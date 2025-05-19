@@ -11,6 +11,13 @@ html{
   font-weight: 300;
   font-style: normal;
 }
+@font-face {
+  font-family: 'MP';
+  src: url(assets/fonts/MyriadPro/MPconditalic.woff2) format('woff2'),
+       url(assets/fonts/MyriadPro/MPconditalic.woff) format('woff');
+  font-weight: 300;
+  font-style: italic;
+}
     body {
       margin: 0;
       background-color: #e3dfd5;
@@ -52,6 +59,18 @@ html{
       font-size: 8rem;
       margin-top: 34vh;
       margin-left: 3vw;
+      position: absolute;
+      opacity: 0;
+      animation: slideIn 1.5s cubic-bezier(.73,-0.01,.23,1) forwards;
+    }
+
+    .subtitle{
+      font-family: 'MP', sans-serif;
+      font-weight: 300;
+      font-size: 2.5rem;
+      font-style: italic;
+      margin-top: 60vh;
+      margin-left: 5vw;
       position: absolute;
       opacity: 0;
       animation: slideIn 1.5s cubic-bezier(.73,-0.01,.23,1) forwards;
