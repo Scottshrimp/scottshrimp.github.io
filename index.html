@@ -9,7 +9,7 @@
 
   <link rel="preload" as="video" href="assets/webm/A_in.webm" type="video/webm">
   <link rel="preload" as="video" href="assets/webm/B_loop.webm" type="video/webm">
-  <link rel="preload" as="video" href="assets/webm/C_out.webm" type="video/webm">
+  <link rel="preload" as="video" href="assets/webm/C_out.mov" type="video/quicktime">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
     <source src="assets/webm/B_loop.webm" type="video/webm">
   </video>
   <video id="loaderC" muted playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 10000; visibility: hidden;">
-    <source src="assets/webm/C_out.webm" type="video/webm">
+    <source src="assets/webm/C_out.mov" type="video/quicktime">
   </video>
 </div>
 
@@ -83,6 +83,15 @@ logo.addEventListener('mouseleave', () => {
   </div>
 
   <script>
+    window.addEventListener('load', () => {
+  setTimeout(() => {
+    // 模拟加载完成
+    loaded = true;
+  }, 8000); // 假装等 8 秒才加载好
+});
+  </script>
+
+  <script>
   document.querySelector('.greeting-text').addEventListener('animationend', () => {
     document.querySelector('.chair').style.display = 'block';
   });
@@ -134,6 +143,7 @@ logo.addEventListener('mouseleave', () => {
   C.onended = () => {
     wrapper.remove();
   };
+
 </script>
 
 </body>
