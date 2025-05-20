@@ -36,12 +36,16 @@ html{
       align-items: center;
       padding-left: 2rem;
       z-index: 1000;
-      box-shadow: 0 2px 0px rgb(173, 156, 71);
+      box-shadow: 0 3px 0px #aa9f88;
     }
 
     .logo {
       height: 45px;
       margin: auto -20px;
+    }
+
+    .logo:hover {
+      filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
     }
 
     .content {

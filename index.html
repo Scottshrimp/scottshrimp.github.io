@@ -15,6 +15,69 @@
     </a>
   </div>
 
+  <div>
+    <script>
+      const logo = document.querySelector('.logo');
+
+      const animation = logo.animate(
+      [
+      { transform: 'scale(1)' },
+      { transform: 'scale(1.05)' }
+      ],
+      {
+      duration: 500,
+      fill: 'forwards',
+      easing: 'cubic-bezier(0,.5,.13,.99)',
+      direction: 'normal'
+      }
+      );
+
+      animation.pause(); // 初始不播放
+
+      logo.addEventListener('mouseenter', () => {
+      animation.playbackRate = 1;
+      animation.play();
+      });
+
+      logo.addEventListener('mouseleave', () => {
+      animation.playbackRate = -1;
+      animation.play();
+      });
+    </script>
+  </div>
+
+  <div>
+    <script>
+      const navbar = document.querySelector('.navbar');
+      const logo = document.querySelector('.logo');
+
+      const animation = logo.animate(
+        [
+          { transform: 'translateY(0)' },
+          { transform: 'translateY(0)' }
+        ],
+        {
+          duration: 500,
+          fill: 'forwards',
+          easing: 'cubic-bezier(0,.5,.13,.99)',
+          direction: 'normal'
+        }
+      );
+
+      animation.pause(); // 初始不播放
+
+      navbar.addEventListener('mouseenter', () => {
+        animation.playbackRate = 1;
+        animation.play();
+      });
+
+      navbar.addEventListener('mouseleave', () => {
+        animation.playbackRate = -1;
+        animation.play();
+      });
+    </script>
+  </div>
+
   <!-- 页面主体 -->
   <div class="content">
     <h1 class="greeting-text">Good morning...</h1>
