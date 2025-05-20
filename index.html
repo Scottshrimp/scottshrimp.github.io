@@ -6,6 +6,10 @@
   <title>ScottShrimp - Good morning</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="icon.ico" type="image/x-icon">
+
+  <link rel="preload" as="video" href="assets/webm/A_in.webm" type="video/webm">
+  <link rel="preload" as="video" href="assets/webm/B_loop.webm" type="video/webm">
+  <link rel="preload" as="video" href="assets/webm/C_out.webm" type="video/webm">
 </head>
 
 <body>
@@ -90,48 +94,58 @@ logo.addEventListener('mouseleave', () => {
   const C = document.getElementById('loaderC');
   const wrapper = document.getElementById('loaderWrapper');
 
-  let loaded = false;
-  let transitioned = false;
+    // 提前准备 C
+    C.load();
+    C.style.visibility = 'hidden';
+    A.style.visibility = 'visible';
 
-  // 提前准备 C
-  C.load();
-  C.style.visibility = 'hidden';
-  A.style.visibility = 'visible';
+    // 监听网页加载完成
+    document.onreadystatechange = () => {
+      if (document.readyState === 'complete') {
+        loaded = true;
+      }
+    };
 
-  document.onreadystatechange = () => {
-    if (document.readyState === 'complete') {
-      loaded = true;
-    }
-  };
+    A.play();
 
-  // 播放 A
-  A.play();
+    // 精准检测 A 播放到最后 0.5 秒
+    let aMonitor = setInterval(() => {
+      if (A.currentTime >= A.duration - 0.5) {
+        clearInterval(aMonitor);
+        if (loaded) {
+          transitionToC();
+        } else {
+          A.style.visibility = 'hidden';
+          B.style.display = 'block';
+          B.play();
+          monitorLoopB();
+        }
+      }
+    }, 100);
 
-  A.onended = () => {
-    if (loaded) {
-      transitioned = true;
-      A.style.visibility = 'hidden';
-      C.style.visibility = 'visible';
-      C.play();
-    } else {
-      A.style.visibility = 'hidden';
-      B.style.display = 'block';
-      B.play();
-
-      const loopCheck = setInterval(() => {
+    function monitorLoopB() {
+      let loopCheck = setInterval(() => {
         if (loaded && !transitioned) {
           clearInterval(loopCheck);
           B.style.display = 'none';
-          C.style.visibility = 'visible';
-          C.play();
+          transitionToC();
         }
-      }, 500);
+      }, B.duration * 250); // 每半圈检测一次加载状态
     }
-  };
 
-  C.onended = () => {
-    wrapper.remove();
-  };
+    function transitionToC() {
+      transitioned = true;
+      A.style.visibility = 'hidden';
+      B.style.display = 'none';
+      C.style.display = 'block';
+      C.style.visibility = 'visible';
+      C.play();
+    }
+
+    C.onended = () => {
+      wrapper.remove();
+    };
+  
 </script>
 
 </body>
