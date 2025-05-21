@@ -37,6 +37,8 @@ html{
   object-fit: cover;
   z-index: 10000;
   visibility: visible;
+  mix-blend-mode: normal;
+  background: transparent;
 }
     body {
       margin: 0;
