@@ -77,17 +77,13 @@
 </script>
 
 <script>
-window.addEventListener('DOMContentLoaded', () => {
   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent.toLowerCase());
   const loaderC = document.getElementById('loaderC');
-  const loaderCSource = document.getElementById('loaderCSource');
 
-  if (isSafari) {
-    loaderCSource.src = "assets/mov/C_out.mov";
-    loaderCSource.type = "video/quicktime";
+  if (isSafari && loaderC) {
+    loaderC.innerHTML = '<source src="assets/mov/C_out.mov" type="video/quicktime">';
     loaderC.load();
   }
-});
 </script>
 
   <!-- 固定导航栏 -->
