@@ -12,6 +12,18 @@
   <link rel="preload" as="video" href="assets/webm/C_out.webm" type="video/webm">
 </head>
 
+<script>
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent.toLowerCase());
+const loaderC = document.getElementById('loaderC');
+const loaderCSource = document.getElementById('loaderCSource');
+
+if (isSafari) {
+  loaderCSource.src = "assets/mov/C_out.mov";
+  loaderCSource.type = "video/quicktime";
+  loaderC.load(); // 必须调用 .load() 才能生效
+}
+</script>
+
 <!-- 加载动画遮罩层 -->
  <div id="loaderWrapper" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none;">
   <video id="loaderA" muted playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 10000;">
@@ -41,6 +53,7 @@
   };
 
   // Preload C early to minimize transition delay
+
   C.load();
   A.play();
 
@@ -73,8 +86,6 @@
   };
 
 </script>
-
-<body>
   <!-- 固定导航栏 -->
   <div class="navbar">
     <a href="/">
