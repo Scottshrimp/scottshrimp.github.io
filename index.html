@@ -142,15 +142,6 @@ logo.addEventListener('mouseleave', () => {
   </div>
 
   <script>
-    window.addEventListener('load', () => {
-  setTimeout(() => {
-    // 模拟加载完成
-    loaded = true;
-  }, 8000); // 假装等 8 秒才加载好
-});
-  </script>
-
-  <script>
   document.querySelector('.greeting-text').addEventListener('animationend', () => {
     document.querySelector('.chair').style.display = 'block';
   });
