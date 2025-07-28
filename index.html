@@ -6,84 +6,33 @@
   <title>ScottShrimp - Good morning</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="icon.ico" type="image/x-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preload" as="video" href="assets/webm/A_in.webm" type="video/webm">
-  <link rel="preload" as="video" href="assets/webm/B_loop.webm" type="video/webm">
-  <link rel="preload" as="video" href="assets/webm/C_out.webm" type="video/webm">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
 </head>
 
 <body>
 <!-- 加载动画遮罩层 -->
- <div id="loaderWrapper" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none;">
-  <video id="loaderA" muted playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 10000;">
-    <source src="assets/webm/A_in.webm" type="video/webm">
-  </video>
-  <video id="loaderB" muted playsinline preload="auto" loop style="width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 10000; visibility: hidden;">
-    <source src="assets/webm/B_loop.webm" type="video/webm">
-  </video>
-  <video id="loaderC" muted playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 10000; visibility: hidden;">
-    <source src="assets/webm/C_out.webm" type="video/webm">
-  </video>
+ <!-- 启动 Lottie 动画遮罩层 -->
+<div id="loaderWrapper" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: transparent; z-index: 9999; pointer-events: none;">
+  <div id="lottieContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: scale(1.05); transform-origin: center;"></div>
 </div>
 
 <script>
-  const A = document.getElementById('loaderA');
-  const B = document.getElementById('loaderB');
-  const C = document.getElementById('loaderC');
-  const wrapper = document.getElementById('loaderWrapper');
+  window.addEventListener('load', () => {
+    const animation = lottie.loadAnimation({
+      container: document.getElementById('lottieContainer'),
+      renderer: 'canvas', // 可改为 'canvas' 若需更高性能
+      loop: false,
+      autoplay: true,
+      path: 'assets/lotties/intro.json' // 你导出的动画路径
+    });
 
-  let loaded = false;
-
-  // Check if the page is loaded
-  document.onreadystatechange = () => {
-    if (document.readyState === 'complete') {
-      loaded = true;
-    }
-  };
-
-  // Preload C early to minimize transition delay
-
-  C.load();
-  A.play();
-
-  A.onloadedmetadata = () => {
-    const duration = A.duration * 1000;
-    setTimeout(() => {
-      if (loaded) {
-        A.style.visibility = 'hidden';
-        C.style.visibility = 'visible';
-        C.play();
-      } else {
-        A.style.visibility = 'hidden';
-        B.style.visibility = 'visible';
-        B.play();
-
-        const loopCheck = setInterval(() => {
-          if (loaded) {
-            clearInterval(loopCheck);
-            B.style.visibility = 'hidden';
-            C.style.visibility = 'visible';
-            C.play();
-          }
-        }, B.duration * 500); // Check halfway through each B loop
-      }
-    }, Math.max(0, duration - 500));
-  };
-
-  C.onended = () => {
-    wrapper.remove();
-  };
-
-</script>
-
-<script>
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent.toLowerCase());
-  const loaderC = document.getElementById('loaderC');
-
-  if (isSafari && loaderC) {
-    loaderC.innerHTML = '<source src="assets/mov/C_out.mov" type="video/quicktime">';
-    loaderC.load();
-  }
+    animation.addEventListener('complete', () => {
+      const wrapper = document.getElementById('loaderWrapper');
+      wrapper.style.transition = 'opacity 0.5s ease';
+      wrapper.style.opacity = 0;
+      setTimeout() = wrapper.remove()
+    });
+  });
 </script>
 
   <!-- 固定导航栏 -->
@@ -148,3 +97,4 @@ logo.addEventListener('mouseleave', () => {
   </script>
 
 </body>
+</html>
