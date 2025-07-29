@@ -19,6 +19,16 @@ html{
   font-style: italic;
 }
 
+#blackFrame {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 9998;
+  pointer-events: none;
+}
+
  #loaderWrapper {
   position: fixed;
   top: 0; left: 0;
@@ -70,10 +80,6 @@ html{
       position: relative;
       width: 100%;
       height: 100vh;
-    }
-
-    .greeting{
-      opacity: 0;
     }
 
     .greeting-text {

@@ -10,6 +10,8 @@
 </head>
 
 <body>
+<!-- 黑色遮罩层 -->
+<div id="blackFrame"></div>
 <!-- 加载动画遮罩层 -->
  <!-- 启动 Lottie 动画遮罩层 -->
 <div id="loaderWrapper" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: transparent; z-index: 9999; pointer-events: none;">
@@ -18,6 +20,11 @@
 
 <script>
   window.addEventListener('load', () => {
+    setTimeout(() => {
+      const blackFrame = document.getElementById('blackFrame');
+      if (blackFrame) blackFrame.remove();
+    }, 3300);
+
     const animation = lottie.loadAnimation({
       container: document.getElementById('lottieContainer'),
       renderer: 'canvas', // 可改为 'canvas' 若需更高性能
@@ -30,7 +37,7 @@
       const wrapper = document.getElementById('loaderWrapper');
       wrapper.style.transition = 'opacity 0.5s ease';
       wrapper.style.opacity = 0;
-      setTimeout() = wrapper.remove()
+      setTimeout(() => wrapper.remove(), 500);
     });
   });
 </script>
