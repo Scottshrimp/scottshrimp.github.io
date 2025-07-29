@@ -12,7 +12,6 @@
 <body>
 <!-- 黑色遮罩层 -->
 <div id="blackFrame"></div>
-<!-- 加载动画遮罩层 -->
  <!-- 启动 Lottie 动画遮罩层 -->
 <div id="loaderWrapper" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: transparent; z-index: 9999; pointer-events: none;">
   <div id="lottieContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: scale(2.3); transform-origin: center;"></div>
@@ -20,31 +19,45 @@
 
 <script>
   window.addEventListener('load', () => {
-    setTimeout(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isInternal = urlParams.get('from') === 'internal';
+    if (isInternal && history.replaceState) {
+      history.replaceState(null, '', window.location.pathname);
+    }
+
+    if (!isInternal) {
+      setTimeout(() => {
+        const blackFrame = document.getElementById('blackFrame');
+        if (blackFrame) blackFrame.remove();
+      }, 3300);
+
+      const animation = lottie.loadAnimation({
+        container: document.getElementById('lottieContainer'),
+        renderer: 'canvas', // 可改为 'canvas' 若需更高性能
+        loop: false,
+        autoplay: true,
+        path: 'assets/lotties/introDesktop1_1.json' // 你导出的动画路径
+      });
+
+      animation.addEventListener('complete', () => {
+        const wrapper = document.getElementById('loaderWrapper');
+        wrapper.style.transition = 'opacity 0.5s ease';
+        wrapper.style.opacity = 0;
+        setTimeout(() => wrapper.remove(), 500);
+      });
+    } else {
+      // 直接移除黑色遮罩和动画遮罩
       const blackFrame = document.getElementById('blackFrame');
       if (blackFrame) blackFrame.remove();
-    }, 3300);
-
-    const animation = lottie.loadAnimation({
-      container: document.getElementById('lottieContainer'),
-      renderer: 'canvas', // 可改为 'canvas' 若需更高性能
-      loop: false,
-      autoplay: true,
-      path: 'assets/lotties/introDesktop1_1.json' // 你导出的动画路径
-    });
-
-    animation.addEventListener('complete', () => {
       const wrapper = document.getElementById('loaderWrapper');
-      wrapper.style.transition = 'opacity 0.5s ease';
-      wrapper.style.opacity = 0;
-      setTimeout(() => wrapper.remove(), 500);
-    });
+      if (wrapper) wrapper.remove();
+    }
   });
 </script>
 
   <!-- 固定导航栏 -->
   <div class="navbar">
-    <a href="/">
+    <a href="/?from=internal">
       <img src="assets/ScottShrimpICO.png" alt="ScottShrimp Logo" class="logo" />
     </a>
   </div>
