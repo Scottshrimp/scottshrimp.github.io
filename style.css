@@ -117,6 +117,7 @@ body.theme-afternoon {
   --fontGreeting: 'Inter_SemiBold';
   --fontSubtitle: 'Birthstone';
   --barboxemi: 0;
+  --subtitlesize: 3;
 }
 
 body.theme-dusk {
@@ -141,8 +142,8 @@ body.theme-night {
   --navbarbcolor: #09317b;
   --bodybcolor: #0e091e;
   --barboxcolor: rgb(0, 0, 0);
-  --fontGreeting: 'Noto_Sans_SC_SemiBold';
-  --fontSubtitle: 'Noto_Sans_SC_Regular';
+  --fontGreeting: 'Noto_Sans_JP_SemiBold';
+  --fontSubtitle: 'Noto_Sans_JP_Regular';
   --barboxemi: 0;
 }
 
@@ -211,7 +212,7 @@ body {
 .subtitle {
   font-family: var(--fontSubtitle);
   font-weight: 400;
-  font-size: 2rem;
+  font-size: calc(var(--subtitlesize, 2) * 1rem);
   font-style: italic;
   margin-top: 40vh;
   margin-left: 7.5vw;
