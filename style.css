@@ -19,6 +19,140 @@ html{
   font-style: italic;
 }
 
+@font-face {
+  font-family: 'Birthstone';
+  src: url(assets/fonts/Birthstone/Birthstone-Regular.woff2) format('woff2'),
+       url(assets/fonts/Birthstone/Birthstone-Regular.woff) format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter_SemiBold';
+  src: url(assets/fonts/Inter/Inter24pt-SemiBold.woff2) format('woff2'),
+       url(assets/fonts/Inter/Inter24pt-SemiBold.woff) format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto_Sans_JP_Regular';
+  src: url(assets/fonts/Noto_Sans_JP/NotoSansJP-Regular.woff2) format('woff2'),
+       url(assets/fonts/Noto_Sans_JP/NotoSansJP-Regular.woff) format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto_Sans_JP_SemiBold';
+  src: url(assets/fonts/Noto_Sans_JP/NotoSansJP-SemiBold.woff2) format('woff2'),
+       url(assets/fonts/Noto_Sans_JP/NotoSansJP-SemiBold.woff) format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto_Sans_JP_Light';
+  src: url(assets/fonts/Noto_Sans_JP/NotoSansJP-Light.woff2) format('woff2'),
+       url(assets/fonts/Noto_Sans_JP/NotoSansJP-Light.woff) format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto_Sans_SC_Regular';
+  src: url(assets/fonts/Noto_Sans_SC/NotoSansSC-Regular.woff2) format('woff2'),
+       url(assets/fonts/Noto_Sans_SC/NotoSansSC-Regular.woff) format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto_Sans_SC_Light';
+  src: url(assets/fonts/Noto_Sans_SC/NotoSansSC-Light.woff2) format('woff2'),
+       url(assets/fonts/Noto_Sans_SC/NotoSansSC-Light.woff) format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto_Sans_SC_SemiBold';
+  src: url(assets/fonts/Noto_Sans_SC/NotoSansSC-SemiBold.woff2) format('woff2'),
+       url(assets/fonts/Noto_Sans_SC/NotoSansSC-SemiBold.woff) format('woff');
+  font-weight: 700;
+  font-style: bold;
+}
+
+body.theme-morning {
+  --navbarbcolor: #b3e9af;
+  --bodybcolor: #e3f6e4;
+  --barboxcolor: rgb(35, 34, 61);
+  --fontGreeting: 'Noto_Sans_SC_SemiBold';
+  --fontSubtitle: 'Noto_Sans_SC_Light';
+  --barboxemi: 0;
+}
+
+body.theme-day {
+  --navbarbcolor: #ffe8ab;
+  --bodybcolor: #fffcdd;
+  --barboxcolor:rgb(255, 72, 0);
+  --fontGreeting: 'Noto_Sans_JP_SemiBold';
+  --fontSubtitle: 'Noto_Sans_JP_Light';
+  --barboxemi: 0;
+}
+
+body.theme-noon {
+  --navbarbcolor: #c6b388;
+  --bodybcolor: #e3dfd5;
+  --barboxcolor: rgb(213, 25, 25);
+  --fontGreeting: 'Noto_Sans_SC_SemiBold';
+  --fontSubtitle: 'Noto_Sans_SC_Light';
+  --barboxemi: 0;
+}
+
+body.theme-afternoon {
+  --navbarbcolor: #350b0b;
+  --bodybcolor: #e3dfd5;
+  --barboxcolor: rgb(93, 93, 93);
+  --fontGreeting: 'Inter_SemiBold';
+  --fontSubtitle: 'Birthstone';
+  --barboxemi: 0;
+}
+
+body.theme-dusk {
+  --navbarbcolor: #d27248;
+  --bodybcolor: #e7c6a1;
+  --barboxcolor: rgb(36, 20, 103);
+  --fontGreeting: 'Inter_SemiBold';
+  --fontSubtitle: 'Noto_Sans_SC_Regular';
+  --barboxemi: 0;
+}
+
+body.theme-evening {
+  --navbarbcolor: #09317b;
+  --bodybcolor: #0e091e;
+  --barboxcolor: rgb(254, 255, 212);
+  --fontGreeting: 'Noto_Sans_SC_SemiBold';
+  --fontSubtitle: 'Noto_Sans_SC_Regular';
+  --barboxemi: 500;
+}
+
+body.theme-night {
+  --navbarbcolor: #09317b;
+  --bodybcolor: #0e091e;
+  --barboxcolor: rgb(0, 0, 0);
+  --fontGreeting: 'Noto_Sans_SC_SemiBold';
+  --fontSubtitle: 'Noto_Sans_SC_Regular';
+  --barboxemi: 0;
+}
+
+body.theme-evening .greeting-text,
+body.theme-night .greeting-text,
+body.theme-evening .subtitle,
+body.theme-night .subtitle {
+  color: #fffbdb;
+}
+
 #blackFrame {
   position: fixed;
   top: 0; left: 0;
@@ -29,84 +163,65 @@ html{
   pointer-events: none;
 }
 
- #loaderWrapper {
+body {
+  margin: 0;
+  background-color: var(--bodybcolor);
+  font-family: sans-serif;
+  overflow-x: hidden;
+}
+
+.navbar {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 9999;
-  pointer-events: none;
-  background: transparent;
-}
-
-#loaderWrapper video {
-  position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 10000;
-  visibility: visible;
-  mix-blend-mode: normal;
-  background: transparent;
+  height: 53px;
+  background-color: var(--navbarbcolor);
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+  z-index: 1000;
+  box-shadow: 
+    0 3px 0px var(--barboxcolor),
+    0 1px calc(var(--barboxemi) * 1px) var(--barboxcolor);
 }
-    body {
-      margin: 0;
-      background-color: #e3dfd5;
-      font-family: sans-serif;
-      overflow-x: hidden;
-    }
 
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 53px;
-      background-color: #d5cdb9;
-      display: flex;
-      align-items: center;
-      padding-left: 2rem;
-      z-index: 1000;
-      box-shadow: 0 3px 0px #aa9f88;
-    }
+.logo {
+  height: 45px;
+  margin: auto -20px;
+}
 
-    .logo {
-      height: 45px;
-      margin: auto -20px;
-    }
+.content {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
 
-    .content {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-    }
+.greeting-text {
+  font-family: var(--fontGreeting);
+  font-weight: 500;
+  font-size: 5.5rem;
+  color: #000;
+  margin-top: 22vh;
+  margin-left: 7vw;
+  position: absolute;
+  opacity: 1;
+}
 
-    .greeting-text {
-      font-family: 'MP', sans-serif;
-      font-weight: 300;
-      font-size: 6rem;
-      margin-top: 34vh;
-      margin-left: 3vw;
-      position: absolute;
-      opacity: 1;
+.subtitle {
+  font-family: var(--fontSubtitle);
+  font-weight: 400;
+  font-size: 2rem;
+  font-style: italic;
+  margin-top: 40vh;
+  margin-left: 7.5vw;
+  position: absolute;
+  opacity: 1;
+}
 
-    }
-
-    .subtitle{
-      font-family: 'MP', sans-serif;
-      font-weight: 300;
-      font-size: 2.5rem;
-      font-style: italic;
-      margin-top: 60vh;
-      margin-left: 5vw;
-      position: absolute;
-      opacity: 1;
-    }
-
-    .chair {
-      position: absolute;
-      transform: scale(0.55);
-      bottom: -24vh;
-      right: -11vw;
-    }
+.chair {
+  position: absolute;
+  transform: scale(0.55);
+  bottom: -24vh;
+  right: -11vw;
+}

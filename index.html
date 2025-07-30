@@ -33,10 +33,10 @@
 
       const animation = lottie.loadAnimation({
         container: document.getElementById('lottieContainer'),
-        renderer: 'canvas', // 可改为 'canvas' 若需更高性能
+        renderer: 'canvas', 
         loop: false,
         autoplay: true,
-        path: 'assets/lotties/introDesktop1_1.json' // 你导出的动画路径
+        path: 'assets/lotties/introDesktop1_1.json'
       });
 
       animation.addEventListener('complete', () => {
@@ -46,7 +46,6 @@
         setTimeout(() => wrapper.remove(), 500);
       });
     } else {
-      // 直接移除黑色遮罩和动画遮罩
       const blackFrame = document.getElementById('blackFrame');
       if (blackFrame) blackFrame.remove();
       const wrapper = document.getElementById('loaderWrapper');
@@ -55,7 +54,76 @@
   });
 </script>
 
-  <!-- 固定导航栏 -->
+<script>
+  const now = new Date();
+  const hour = now.getHours();
+  let theme = '';
+
+  if (hour >= 6 && hour < 9) {
+    theme = 'theme-morning';
+  } else if (hour >= 9 && hour < 11) {
+    theme = 'theme-day';
+  } else if (hour >= 11 && hour < 13) {
+    theme = 'theme-noon';
+  } else if (hour >= 13 && hour < 17) {
+    theme = 'theme-afternoon';
+  } else if (hour >= 17 && hour < 20) {
+    theme = 'theme-dusk';
+  } else if (hour >= 20 && hour < 22) {
+    theme = 'theme-evening';
+  } else {
+    theme = 'theme-night';
+  }
+
+  document.body.classList.add(theme);
+  document.documentElement.classList.add(theme);
+  const greetingsByTheme = {
+    'theme-morning': '一日之计在于晨。', 
+    'theme-day': '今日もがんばってね！',
+    'theme-noon': '午安。',
+    'theme-afternoon': 'Good afternoon～',
+    'theme-dusk': 'What a day...',
+    'theme-evening': '晚上好。',
+    'theme-night': 'おやすみZZZZ'
+  };
+
+  const subtitlesByTheme = {
+    'theme-morning': '昨晚睡得好吗？我的朋友', 
+    'theme-day': '毎日も一生懸命でした',
+    'theme-noon': '不吃午饭也可以',
+    'theme-afternoon': 'Let‘s have some tea',
+    'theme-dusk': '今天你看到日落了吗？',
+    'theme-evening': '晚饭要吃七分饱',
+    'theme-night': 'zzzZZZZZ'
+  };
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const logo = document.querySelector('.logo');
+    const greeting = document.querySelector('.greeting-text');
+    const subtitle = document.querySelector('.subtitle');
+    if (theme === 'theme-night' && logo) {
+      logo.src = 'assets/ScottShrimpICO_white.png';
+    }
+
+    if (theme === 'theme-evening' && logo) {
+      logo.src = 'assets/ScottShrimpICO_white.png';
+    }
+
+    if (theme === 'theme-afternoon' && logo) {
+      logo.src = 'assets/ScottShrimpICO_white.png';
+    }
+
+    if (greeting) {
+      greeting.textContent = greetingsByTheme[theme] || 'Greetings not loaded as expected_XD';
+    }
+
+    if (subtitle) {
+      subtitle.textContent = subtitlesByTheme[theme] || 'Subtitles not loaded as expected_XD';
+    }
+  });
+</script>
+
+  <!-- 导航栏 -->
   <div class="navbar">
     <a href="/?from=internal">
       <img src="assets/ScottShrimpICO.png" alt="ScottShrimp Logo" class="logo" />
@@ -103,18 +171,12 @@ logo.addEventListener('mouseleave', () => {
     </script>
   </div>
 
-  <!-- 页面主体 -->
+  <!-- 主体 -->
   <div class="content">
     <h1 class="greeting-text">Good morning...</h1>
     <h2 class="subtitle">Let's have some tea</h2>
     <img src="assets/chair.png" alt="Chair Image" class="chair" />
   </div>
-
-  <script>
-  document.querySelector('.greeting-text').addEventListener('animationend', () => {
-    document.querySelector('.chair').style.display = 'block';
-  });
-  </script>
 
 </body>
 </html>
