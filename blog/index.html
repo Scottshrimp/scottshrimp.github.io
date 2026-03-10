@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScottShrimp Studio · Blog</title>
+  <meta name="description" content="Personal notes on architecture, design, and building useful products." />
+  <link rel="icon" href="/icon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="/assets/styles/base.css" />
+  <link rel="stylesheet" href="/assets/styles/layout.css" />
+  <link rel="stylesheet" href="/assets/styles/blog.css" />
+  <script type="module" src="/assets/js/pages/blog-list.js"></script>
+</head>
+<body>
+  <div class="shell" data-shell="header"></div>
+
+  <main>
+    <section class="panel blog-head">
+      <span class="pill">Content</span>
+      <h1>Blog & Notes</h1>
+      <p>Posts are modeled as structured entries with slug, tags, language, draft state, and markdown-like body content.</p>
+      <div class="blog-controls">
+        <input id="blogSearch" type="search" placeholder="Search title, summary, tags..." />
+        <a class="inline-link" href="/admin/">Edit in Admin</a>
+      </div>
+      <div id="blogTags" class="tag-wrap"></div>
+    </section>
+
+    <section id="blogList" class="blog-list"></section>
+  </main>
+
+  <div data-shell="footer"></div>
+</body>
+</html>

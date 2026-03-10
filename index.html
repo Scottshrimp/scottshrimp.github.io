@@ -3,180 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScottShrimp - Good morning</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="icon.ico" type="image/x-icon">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+  <title>ScottShrimp Studio · Home</title>
+  <meta name="description" content="ScottShrimp Studio: interactive tools, curated content, personal blog, and backend-ready data operations." />
+  <link rel="icon" href="/icon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="/assets/styles/base.css" />
+  <link rel="stylesheet" href="/assets/styles/layout.css" />
+  <link rel="stylesheet" href="/assets/styles/home.css" />
+  <script type="module" src="/assets/js/pages/home.js"></script>
 </head>
-
 <body>
-<!-- 黑色遮罩层 -->
-<div id="blackFrame"></div>
- <!-- 启动 Lottie 动画遮罩层 -->
-<div id="loaderWrapper" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: transparent; z-index: 9999; pointer-events: none;">
-  <div id="lottieContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: scale(2.3); transform-origin: center;"></div>
-</div>
+  <div class="shell" data-shell="header"></div>
 
-<script>
-  window.addEventListener('load', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const isInternal = urlParams.get('from') === 'internal';
-    if (isInternal && history.replaceState) {
-      history.replaceState(null, '', window.location.pathname);
-    }
+  <main>
+    <section class="panel hero">
+      <div class="hero-copy">
+        <span class="pill">Time-based interface · <span class="js-period">Auto</span></span>
+        <h1 class="hero-title js-greeting">Welcome back.</h1>
+        <p class="hero-subtitle js-subtitle">This homepage is now a modular studio for tools, content, and data workflows.</p>
+        <label class="theme-switch">
+          Theme Mode
+          <select id="themeMode" aria-label="Theme mode selector"></select>
+        </label>
+      </div>
 
-    if (!isInternal) {
-      setTimeout(() => {
-        const blackFrame = document.getElementById('blackFrame');
-        if (blackFrame) blackFrame.remove();
-      }, 3300);
+      <aside class="hero-accent">
+        <h2>Studio Direction</h2>
+        <p>Interaction tools for practical usage, editorial content for long-term value, and a compact admin surface for quick updates.</p>
+        <p class="script-note"><strong>Current architecture:</strong> route-split frontend + service layer + backend-ready API client.</p>
+        <a href="/admin/" class="inline-link">Open Quick Admin</a>
+      </aside>
+    </section>
 
-      const animation = lottie.loadAnimation({
-        container: document.getElementById('lottieContainer'),
-        renderer: 'canvas', 
-        loop: false,
-        autoplay: true,
-        path: 'assets/lotties/introDesktop1_1.json'
-      });
+    <section class="kpi-grid">
+      <article class="kpi-card">
+        <div class="num" data-kpi="tools">0</div>
+        <div class="label">Managed tools</div>
+      </article>
+      <article class="kpi-card">
+        <div class="num" data-kpi="posts">0</div>
+        <div class="label">Published notes</div>
+      </article>
+      <article class="kpi-card">
+        <div class="num" data-kpi="tags">0</div>
+        <div class="label">Knowledge tags</div>
+      </article>
+    </section>
 
-      animation.addEventListener('complete', () => {
-        const wrapper = document.getElementById('loaderWrapper');
-        wrapper.style.transition = 'opacity 0.5s ease';
-        wrapper.style.opacity = 0;
-        setTimeout(() => wrapper.remove(), 500);
-      });
-    } else {
-      const blackFrame = document.getElementById('blackFrame');
-      if (blackFrame) blackFrame.remove();
-      const wrapper = document.getElementById('loaderWrapper');
-      if (wrapper) wrapper.remove();
-    }
-  });
-</script>
+    <section class="home-split">
+      <div class="panel">
+        <h2>Featured Tools</h2>
+        <p class="script-note">Fast, browser-native utilities for daily work.</p>
+        <div id="featuredTools" class="panel-grid"></div>
+      </div>
 
-<script>
-  const now = new Date();
-  const hour = now.getHours();
-  let theme = '';
+      <figure class="home-image">
+        <img src="/assets/chair.png" alt="Studio chair illustration" loading="lazy" />
+      </figure>
+    </section>
 
-  if (hour >= 6 && hour < 9) {
-    theme = 'theme-morning';
-  } else if (hour >= 9 && hour < 11) {
-    theme = 'theme-day';
-  } else if (hour >= 11 && hour < 13) {
-    theme = 'theme-noon';
-  } else if (hour >= 13 && hour < 17) {
-    theme = 'theme-afternoon';
-  } else if (hour >= 17 && hour < 20) {
-    theme = 'theme-dusk';
-  } else if (hour >= 20 && hour < 22) {
-    theme = 'theme-evening';
-  } else {
-    theme = 'theme-night';
-  }
+    <section class="panel">
+      <h2>Latest Blog Entries</h2>
+      <p class="script-note">Structured content model, filterable list, and backend sync-ready service layer.</p>
+      <div id="featuredPosts" class="panel-grid"></div>
+    </section>
+  </main>
 
-  document.body.classList.add(theme);
-  document.documentElement.classList.add(theme);
-  const greetingsByTheme = {
-    'theme-morning': '一日之计在于晨。', 
-    'theme-day': '今日もがんばってね！',
-    'theme-noon': '中午好。',
-    'theme-afternoon': 'Good afternoon～',
-    'theme-dusk': 'What a day...',
-    'theme-evening': '晚上好。',
-    'theme-night': 'おやすみZZZZ'
-  };
-
-  const subtitlesByTheme = {
-    'theme-morning': '昨晚睡得好吗？我的朋友', 
-    'theme-day': '毎日も一生懸命でした',
-    'theme-noon': '不吃午饭也可以',
-    'theme-afternoon': 'Let‘s have some tea.',
-    'theme-dusk': '今天你看到日落了吗？',
-    'theme-evening': '晚饭要吃七分饱',
-    'theme-night': 'zzzZZZZZ'
-  };
-
-  window.addEventListener('DOMContentLoaded', () => {
-    const logo = document.querySelector('.logo');
-    const greeting = document.querySelector('.greeting-text');
-    const subtitle = document.querySelector('.subtitle');
-    if (theme === 'theme-night' && logo) {
-      logo.src = 'assets/ScottShrimpICO_white.png';
-    }
-
-    if (theme === 'theme-evening' && logo) {
-      logo.src = 'assets/ScottShrimpICO_white.png';
-    }
-
-    if (theme === 'theme-afternoon' && logo) {
-      logo.src = 'assets/ScottShrimpICO_white.png';
-    }
-
-    if (greeting) {
-      greeting.textContent = greetingsByTheme[theme] || 'Greetings not loaded as expected_XD';
-    }
-
-    if (subtitle) {
-      subtitle.textContent = subtitlesByTheme[theme] || 'Subtitles not loaded as expected_XD';
-    }
-  });
-</script>
-
-  <!-- 导航栏 -->
-  <div class="navbar">
-    <a href="/?from=internal">
-      <img src="assets/ScottShrimpICO.png" alt="ScottShrimp Logo" class="logo" />
-    </a>
-  </div>
-
-  <div>
-    <script>
-      const logo = document.querySelector('.logo');
-
-      let forwardAnim = null;
-      let backwardAnim = null;
-
-      logo.addEventListener('mouseenter', () => {
-      if (backwardAnim) backwardAnim.cancel();
-
-      forwardAnim = logo.animate(
-      [
-      { transform: 'scale(1)' },
-      { transform: 'scale(1.05)' }
-      ],
-      {
-      duration: 700,
-      fill: 'forwards',
-      easing: 'cubic-bezier(0,.5,.13,.99)'
-    }
-  );
-});
-
-logo.addEventListener('mouseleave', () => {
-  if (forwardAnim) forwardAnim.cancel();
-
-  backwardAnim = logo.animate(
-    [
-      { transform: 'scale(1.05)' },
-      { transform: 'scale(1)' }
-    ],
-    {
-      duration: 1000,
-      fill: 'forwards',
-      easing: 'cubic-bezier(0,.5,.13,.99)'
-    }
-  );
-});
-    </script>
-  </div>
-
-  <!-- 主体 -->
-  <div class="content">
-    <h1 class="greeting-text">Good morning...</h1>
-    <h2 class="subtitle">Let's have some tea</h2>
-    <img src="assets/chair.png" alt="Chair Image" class="chair" />
-  </div>
-
+  <div data-shell="footer"></div>
 </body>
 </html>

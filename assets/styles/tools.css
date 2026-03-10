@@ -1,0 +1,113 @@
+.page-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: end;
+}
+
+.page-head h1 {
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+}
+
+.page-head p {
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+.tool-workbench {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.workbench-card {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1rem;
+  background: color-mix(in srgb, var(--bg-elev) 90%, white 10%);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.workbench-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.workbench-output {
+  min-height: 120px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 0.75rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: color-mix(in srgb, var(--bg-elev) 90%, black 10%);
+}
+
+.workbench-output[data-state='error'] {
+  color: #c43f27;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.metric-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.8rem;
+}
+
+.metric-card .num {
+  font-size: 1.4rem;
+  font-family: 'MP Semi', 'MP', sans-serif;
+}
+
+.metric-card .label {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.catalog-grid {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tool-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 0.95rem;
+  background: color-mix(in srgb, var(--bg-elev) 92%, white 8%);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.tool-card-category {
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.tool-card-status {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--text);
+  padding: 0.2rem 0.65rem;
+  font-size: 0.78rem;
+}
+
+@media (max-width: 960px) {
+  .tool-workbench,
+  .catalog-grid {
+    grid-template-columns: 1fr;
+  }
+}

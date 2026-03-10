@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScottShrimp Studio · Tools</title>
+  <meta name="description" content="Interactive tools for JSON formatting, text metrics, and timezone conversion." />
+  <link rel="icon" href="/icon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="/assets/styles/base.css" />
+  <link rel="stylesheet" href="/assets/styles/layout.css" />
+  <link rel="stylesheet" href="/assets/styles/tools.css" />
+  <script type="module" src="/assets/js/pages/tools.js"></script>
+</head>
+<body>
+  <div class="shell" data-shell="header"></div>
+
+  <main>
+    <section class="panel page-head">
+      <div>
+        <span class="pill">Interactive</span>
+        <h1>Tool Workbench</h1>
+        <p>Each tool is configured in data, rendered on the page, and can later be backed by API endpoints without changing this UI shell.</p>
+      </div>
+      <a class="inline-link" href="/admin/">Manage tool metadata in Admin</a>
+    </section>
+
+    <section class="tool-workbench">
+      <article class="workbench-card">
+        <h2>JSON Pretty</h2>
+        <p>Paste JSON and format it for readability or minified transport.</p>
+        <textarea id="jsonInput" placeholder='{"hello": "world"}'></textarea>
+        <div class="workbench-actions">
+          <button id="jsonFormatBtn" data-variant="primary" type="button">Format</button>
+          <button id="jsonMinifyBtn" type="button">Minify</button>
+        </div>
+        <pre id="jsonOutput" class="workbench-output"></pre>
+      </article>
+
+      <article class="workbench-card">
+        <h2>Text Metrics</h2>
+        <p>Quick signal for drafts, briefs, and blog copy.</p>
+        <textarea id="metricsInput" placeholder="Write or paste text here..."></textarea>
+        <div class="metric-grid">
+          <div class="metric-card"><div class="num" data-metric="words">0</div><div class="label">Words</div></div>
+          <div class="metric-card"><div class="num" data-metric="chars">0</div><div class="label">Characters</div></div>
+          <div class="metric-card"><div class="num" data-metric="lines">0</div><div class="label">Lines</div></div>
+        </div>
+      </article>
+
+      <article class="workbench-card">
+        <h2>Timezone Shift</h2>
+        <p>Convert one timestamp across regions for distributed collaboration.</p>
+        <div class="grid-two">
+          <label>
+            Source time
+            <input id="tzInputTime" type="datetime-local" />
+          </label>
+          <label>
+            Source zone
+            <select id="tzSource">
+              <option value="Asia/Shanghai">Asia/Shanghai</option>
+              <option value="Asia/Tokyo">Asia/Tokyo</option>
+              <option value="UTC">UTC</option>
+              <option value="America/Los_Angeles">America/Los_Angeles</option>
+              <option value="America/New_York">America/New_York</option>
+            </select>
+          </label>
+        </div>
+        <label>
+          Target zone
+          <select id="tzTarget">
+            <option value="UTC">UTC</option>
+            <option value="Asia/Shanghai">Asia/Shanghai</option>
+            <option value="Asia/Tokyo">Asia/Tokyo</option>
+            <option value="America/Los_Angeles">America/Los_Angeles</option>
+            <option value="America/New_York">America/New_York</option>
+          </select>
+        </label>
+        <div class="workbench-actions">
+          <button id="tzConvertBtn" data-variant="primary" type="button">Convert</button>
+        </div>
+        <div id="tzOutput" class="workbench-output"></div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>Tool Catalog (Data Driven)</h2>
+      <p class="script-note">Metadata source: static JSON, local override, or backend API.</p>
+      <div id="toolCatalog" class="catalog-grid"></div>
+    </section>
+  </main>
+
+  <div data-shell="footer"></div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+.about-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1.05fr 0.95fr;
+}
+
+.about-head h1 {
+  font-size: clamp(1.9rem, 4vw, 3.1rem);
+  margin-bottom: 0.7rem;
+}
+
+.about-head p {
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+.timeline {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.timeline-item {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.85rem;
+  background: color-mix(in srgb, var(--bg-elev) 91%, white 9%);
+}
+
+.timeline-item .year {
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.timeline-item h3 {
+  font-size: 1.15rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.35rem;
+}
+
+.about-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1rem;
+  background: color-mix(in srgb, var(--bg-elev) 91%, white 9%);
+  display: grid;
+  gap: 0.7rem;
+}
+
+.about-card p {
+  color: var(--muted);
+}
+
+.about-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.about-signature {
+  font-family: 'Birthstone', cursive;
+  font-size: 2.1rem;
+  color: var(--accent);
+}
+
+@media (max-width: 960px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}

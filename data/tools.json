@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "updatedAt": "2026-03-10",
+  "tools": [
+    {
+      "id": "json-pretty",
+      "name": "JSON Pretty",
+      "category": "developer",
+      "description": "Format and validate JSON quickly in the browser.",
+      "status": "active"
+    },
+    {
+      "id": "text-metrics",
+      "name": "Text Metrics",
+      "category": "writing",
+      "description": "Count words, characters, and paragraph density.",
+      "status": "active"
+    },
+    {
+      "id": "timezone-shift",
+      "name": "Timezone Shift",
+      "category": "productivity",
+      "description": "Convert one timestamp between major time zones.",
+      "status": "active"
+    }
+  ]
+}

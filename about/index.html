@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScottShrimp Studio · About</title>
+  <meta name="description" content="About the studio direction, system design choices, and roadmap." />
+  <link rel="icon" href="/icon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="/assets/styles/base.css" />
+  <link rel="stylesheet" href="/assets/styles/layout.css" />
+  <link rel="stylesheet" href="/assets/styles/about.css" />
+  <script type="module" src="/assets/js/pages/about.js"></script>
+</head>
+<body>
+  <div class="shell" data-shell="header"></div>
+
+  <main>
+    <section class="panel about-head">
+      <span class="pill">About</span>
+      <h1>A Personal Studio, Built Like a Product</h1>
+      <p>This site is evolving from one static greeting page into a modular platform where interaction, editorial content, and operational tooling share one coherent system.</p>
+    </section>
+
+    <section class="about-grid">
+      <div class="panel timeline">
+        <article class="timeline-item">
+          <p class="year">Phase 1</p>
+          <h3>Route & Module Refactor</h3>
+          <p>Separated home, tools, blog, about, and admin surfaces with shared core services.</p>
+        </article>
+        <article class="timeline-item">
+          <p class="year">Phase 2</p>
+          <h3>Content Model & Management</h3>
+          <p>Blog entries and tool metadata moved to structured models with quick CRUD interface.</p>
+        </article>
+        <article class="timeline-item">
+          <p class="year">Phase 3</p>
+          <h3>Backend Integration</h3>
+          <p>API client already in place, so remote data sync can be enabled by configuration.</p>
+        </article>
+      </div>
+
+      <aside class="panel about-card">
+        <h2>Core Principles</h2>
+        <div class="about-tag-list">
+          <span class="pill">Clear IA</span>
+          <span class="pill">Data-driven UI</span>
+          <span class="pill">Progressive enhancement</span>
+          <span class="pill">Fast operations</span>
+        </div>
+        <p>Frontend stays readable, backend remains optional, and day-to-day updates should be possible in minutes.</p>
+        <p class="about-signature">ScottShrimp</p>
+      </aside>
+    </section>
+  </main>
+
+  <div data-shell="footer"></div>
+</body>
+</html>

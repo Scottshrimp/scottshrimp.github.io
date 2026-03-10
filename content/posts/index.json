@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "updatedAt": "2026-03-10",
+  "posts": [
+    {
+      "slug": "redesign-kickoff",
+      "title": "Redesign Kickoff: From Greeting Page to Digital Studio",
+      "date": "2026-03-10",
+      "tags": ["architecture", "frontend", "roadmap"],
+      "summary": "A migration plan for turning this homepage into tools + content + blog + backend-managed platform.",
+      "lang": "en",
+      "draft": false,
+      "cover": "/assets/chair.png",
+      "content": "## Why redesign now?\nThe current site has a memorable visual identity but all logic lives in one page.\n\n## What changes first\n1. Split routes for clearer information architecture.\n2. Create shared services for content and tools.\n3. Add an admin surface for fast updates.\n\n## Success criteria\n- New pages stay lightweight.\n- Content is editable without touching core UI code.\n- Backend integration is optional but easy to enable."
+    },
+    {
+      "slug": "theme-engine-notes",
+      "title": "Theme Engine Notes",
+      "date": "2026-03-09",
+      "tags": ["design-system", "ux"],
+      "summary": "Time-based themes keep the personal atmosphere but move into a reusable system module.",
+      "lang": "en",
+      "draft": false,
+      "cover": "/assets/greeting DAY.png",
+      "content": "## Goal\nTheme should not be a one-off script. It should be a shared capability.\n\n## Theme dimensions\n- Time period\n- Palette\n- Greeting tone\n- Contrast mode\n\n## Next step\nAllow users to pin a preferred theme while keeping auto mode as default."
+    },
+    {
+      "slug": "quick-admin-design",
+      "title": "Designing the Quick Admin",
+      "date": "2026-03-08",
+      "tags": ["backend", "ops", "admin"],
+      "summary": "Fast data management starts local, then syncs to API when available.",
+      "lang": "en",
+      "draft": false,
+      "cover": "/assets/ScottShrimpICO.png",
+      "content": "## Product intent\nManagement should be fast enough for daily updates.\n\n## Capability baseline\n- Create, edit, and delete entries\n- Search and filter\n- Export data snapshots\n\n## API contract\nPOST /posts\nPUT /posts/:slug\nDELETE /posts/:slug\nGET /posts"
+    }
+  ]
+}

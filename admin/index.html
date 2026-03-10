@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScottShrimp Studio · Admin</title>
+  <meta name="description" content="Quick admin panel for managing blog and tools data." />
+  <link rel="icon" href="/icon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="/assets/styles/base.css" />
+  <link rel="stylesheet" href="/assets/styles/layout.css" />
+  <link rel="stylesheet" href="/assets/styles/admin.css" />
+  <script type="module" src="/assets/js/pages/admin.js"></script>
+</head>
+<body>
+  <div class="shell" data-shell="header"></div>
+
+  <main>
+    <section class="panel admin-head">
+      <span class="pill">Operations</span>
+      <h1>Quick Admin</h1>
+      <p>Manage data quickly in local mode, then switch to remote API mode by setting API base URL. This keeps operations lightweight while preserving backend scalability.</p>
+      <div class="form-row">
+        <label>
+          API Base URL
+          <input id="apiBaseInput" type="url" placeholder="https://api.example.com" />
+        </label>
+        <div>
+          <button id="saveApiBaseBtn" type="button" data-variant="primary">Save API Base</button>
+          <p class="admin-note">When empty, admin uses local browser storage + static fallback.</p>
+        </div>
+      </div>
+      <div id="adminToast" class="toast" data-kind="info"></div>
+    </section>
+
+    <section class="admin-grid">
+      <article class="admin-card">
+        <h2>Post Editor</h2>
+        <form id="postForm" class="form-grid">
+          <div class="form-row">
+            <label>Slug<input name="slug" type="text" placeholder="my-post-slug" /></label>
+            <label>Date<input name="date" type="date" required /></label>
+          </div>
+          <label>Title<input name="title" type="text" required /></label>
+          <div class="form-row">
+            <label>Tags (comma separated)<input name="tags" type="text" placeholder="architecture, frontend" /></label>
+            <label>Language<input name="lang" type="text" value="en" /></label>
+          </div>
+          <label>Summary<textarea name="summary" placeholder="Short summary..."></textarea></label>
+          <label>Cover URL<input name="cover" type="text" placeholder="/assets/chair.png" /></label>
+          <label>Content<textarea name="content" placeholder="Use markdown-like text..."></textarea></label>
+          <label><input name="draft" type="checkbox" /> Draft</label>
+          <div class="form-actions">
+            <button type="submit" data-variant="primary">Save Post</button>
+            <button id="postResetBtn" type="button">Reset</button>
+            <button id="postExportBtn" type="button">Export JSON</button>
+          </div>
+        </form>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Slug</th><th>Title</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="postRows"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="admin-card">
+        <h2>Tool Editor</h2>
+        <form id="toolForm" class="form-grid">
+          <label>Id<input name="id" type="text" placeholder="tool-id" /></label>
+          <label>Name<input name="name" type="text" required /></label>
+          <div class="form-row">
+            <label>Category<input name="category" type="text" placeholder="developer" /></label>
+            <label>
+              Status
+              <select name="status">
+                <option value="active">active</option>
+                <option value="maintenance">maintenance</option>
+                <option value="paused">paused</option>
+              </select>
+            </label>
+          </div>
+          <label>Description<textarea name="description" placeholder="What this tool does..."></textarea></label>
+          <div class="form-actions">
+            <button type="submit" data-variant="primary">Save Tool</button>
+            <button id="toolResetBtn" type="button">Reset</button>
+            <button id="toolExportBtn" type="button">Export JSON</button>
+          </div>
+        </form>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Id</th><th>Name</th><th>Category</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="toolRows"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <div data-shell="footer"></div>
+</body>
+</html>
