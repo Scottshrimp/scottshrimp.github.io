@@ -3,71 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScottShrimp Studio · Home</title>
-  <meta name="description" content="ScottShrimp Studio: interactive tools, curated content, personal blog, and backend-ready data operations." />
-  <link rel="icon" href="/icon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="/assets/styles/base.css" />
-  <link rel="stylesheet" href="/assets/styles/layout.css" />
-  <link rel="stylesheet" href="/assets/styles/home.css" />
-  <script type="module" src="/assets/js/pages/home.js"></script>
+  <title>ScottShrimp - Good morning</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="icon.ico" type="image/x-icon">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
 </head>
+
 <body>
-  <div class="shell" data-shell="header"></div>
+<!-- 黑色遮罩层 -->
+<div id="blackFrame"></div>
+ <!-- 启动 Lottie 动画遮罩层 -->
+<div id="loaderWrapper" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: transparent; z-index: 9999; pointer-events: none;">
+  <div id="lottieContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: scale(2.3); transform-origin: center;"></div>
+</div>
 
-  <main>
-    <section class="panel hero">
-      <div class="hero-copy">
-        <span class="pill">Time-based interface · <span class="js-period">Auto</span></span>
-        <h1 class="hero-title js-greeting">Welcome back.</h1>
-        <p class="hero-subtitle js-subtitle">This homepage is now a modular studio for tools, content, and data workflows.</p>
-        <label class="theme-switch">
-          Theme Mode
-          <select id="themeMode" aria-label="Theme mode selector"></select>
-        </label>
-      </div>
+<script>
+  window.addEventListener('load', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isInternal = urlParams.get('from') === 'internal';
+    if (isInternal && history.replaceState) {
+      history.replaceState(null, '', window.location.pathname);
+    }
 
-      <aside class="hero-accent">
-        <h2>Studio Direction</h2>
-        <p>Interaction tools for practical usage, editorial content for long-term value, and a compact admin surface for quick updates.</p>
-        <p class="script-note"><strong>Current architecture:</strong> route-split frontend + service layer + backend-ready API client.</p>
-        <a href="/admin/" class="inline-link">Open Quick Admin</a>
-      </aside>
-    </section>
+    if (!isInternal) {
+      setTimeout(() => {
+        const blackFrame = document.getElementById('blackFrame');
+        if (blackFrame) blackFrame.remove();
+      }, 3300);
 
-    <section class="kpi-grid">
-      <article class="kpi-card">
-        <div class="num" data-kpi="tools">0</div>
-        <div class="label">Managed tools</div>
-      </article>
-      <article class="kpi-card">
-        <div class="num" data-kpi="posts">0</div>
-        <div class="label">Published notes</div>
-      </article>
-      <article class="kpi-card">
-        <div class="num" data-kpi="tags">0</div>
-        <div class="label">Knowledge tags</div>
-      </article>
-    </section>
+      const animation = lottie.loadAnimation({
+        container: document.getElementById('lottieContainer'),
+        renderer: 'canvas', 
+        loop: false,
+        autoplay: true,
+        path: 'assets/lotties/introDesktop1_1.json'
+      });
 
-    <section class="home-split">
-      <div class="panel">
-        <h2>Featured Tools</h2>
-        <p class="script-note">Fast, browser-native utilities for daily work.</p>
-        <div id="featuredTools" class="panel-grid"></div>
-      </div>
+      animation.addEventListener('complete', () => {
+        const wrapper = document.getElementById('loaderWrapper');
+        wrapper.style.transition = 'opacity 0.5s ease';
+        wrapper.style.opacity = 0;
+        setTimeout(() => wrapper.remove(), 500);
+      });
+    } else {
+      const blackFrame = document.getElementById('blackFrame');
+      if (blackFrame) blackFrame.remove();
+      const wrapper = document.getElementById('loaderWrapper');
+      if (wrapper) wrapper.remove();
+    }
+  });
+</script>
 
-      <figure class="home-image">
-        <img src="/assets/chair.png" alt="Studio chair illustration" loading="lazy" />
-      </figure>
-    </section>
+<script type="module">
+  import { initThemeEngine } from './assets/js/core/theme-engine.js';
 
-    <section class="panel">
-      <h2>Latest Blog Entries</h2>
-      <p class="script-note">Structured content model, filterable list, and backend sync-ready service layer.</p>
-      <div id="featuredPosts" class="panel-grid"></div>
-    </section>
-  </main>
+  initThemeEngine();
+</script>
 
-  <div data-shell="footer"></div>
+  <!-- 导航栏 -->
+  <div class="navbar">
+    <a href="/?from=internal">
+      <img src="assets/ScottShrimpICO.png" alt="ScottShrimp Logo" class="logo" />
+    </a>
+  </div>
+
+  <div>
+    <script>
+      const logo = document.querySelector('.logo');
+
+      let forwardAnim = null;
+      let backwardAnim = null;
+
+      logo.addEventListener('mouseenter', () => {
+      if (backwardAnim) backwardAnim.cancel();
+
+      forwardAnim = logo.animate(
+      [
+      { transform: 'scale(1)' },
+      { transform: 'scale(1.05)' }
+      ],
+      {
+      duration: 700,
+      fill: 'forwards',
+      easing: 'cubic-bezier(0,.5,.13,.99)'
+    }
+  );
+});
+
+logo.addEventListener('mouseleave', () => {
+  if (forwardAnim) forwardAnim.cancel();
+
+  backwardAnim = logo.animate(
+    [
+      { transform: 'scale(1.05)' },
+      { transform: 'scale(1)' }
+    ],
+    {
+      duration: 1000,
+      fill: 'forwards',
+      easing: 'cubic-bezier(0,.5,.13,.99)'
+    }
+  );
+});
+    </script>
+  </div>
+
+  <!-- 主体 -->
+  <div class="content">
+    <h1 class="greeting-text">Good morning...</h1>
+    <h2 class="subtitle">Let's have some tea</h2>
+    <img src="assets/chair.png" alt="Chair Image" class="chair" />
+  </div>
+
 </body>
 </html>

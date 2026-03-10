@@ -1,97 +1,78 @@
-import { getStorageKey } from './config.js';
-
-const THEMES = [
-  {
-    id: 'dawn',
-    label: 'Dawn',
-    start: 5,
-    end: 9,
-    greeting: '早安，欢迎回来。',
-    subtitle: 'Today starts with one meaningful move.'
-  },
-  {
-    id: 'daylight',
-    label: 'Daylight',
-    start: 9,
-    end: 13,
-    greeting: '你好，保持节奏。',
-    subtitle: 'Build steadily, review quickly.'
-  },
-  {
-    id: 'afternoon',
-    label: 'Afternoon',
-    start: 13,
-    end: 18,
-    greeting: '下午好，继续推进。',
-    subtitle: 'Ship one thing before the sun tilts.'
-  },
-  {
-    id: 'sunset',
-    label: 'Sunset',
-    start: 18,
-    end: 21,
-    greeting: '黄昏时分，整理成果。',
-    subtitle: 'Reflect, then sharpen the next plan.'
-  },
-  {
-    id: 'night',
-    label: 'Night',
-    start: 21,
-    end: 24,
-    greeting: '晚上好，慢下来也没关系。',
-    subtitle: 'Quiet focus beats noisy speed.'
-  },
-  {
-    id: 'midnight',
-    label: 'Midnight',
-    start: 0,
-    end: 5,
-    greeting: '深夜模式，注意休息。',
-    subtitle: 'Protect your energy, not just your time.'
-  }
+const THEME_BOUNDS = [
+  { start: 6, end: 9, theme: 'theme-morning' },
+  { start: 9, end: 11, theme: 'theme-day' },
+  { start: 11, end: 13, theme: 'theme-noon' },
+  { start: 13, end: 17, theme: 'theme-afternoon' },
+  { start: 17, end: 20, theme: 'theme-dusk' },
+  { start: 20, end: 22, theme: 'theme-evening' },
+  { start: 22, end: 24, theme: 'theme-night' },
+  { start: 0, end: 6, theme: 'theme-night' }
 ];
 
-function themeFromHour(hour) {
-  return THEMES.find((item) => hour >= item.start && hour < item.end) || THEMES[0];
+const GREETINGS_BY_THEME = {
+  'theme-morning': '一日之计在于晨。',
+  'theme-day': '今日もがんばってね！',
+  'theme-noon': '中午好。',
+  'theme-afternoon': 'Good afternoon～',
+  'theme-dusk': 'What a day...',
+  'theme-evening': '晚上好。',
+  'theme-night': 'おやすみZZZZ'
+};
+
+const SUBTITLES_BY_THEME = {
+  'theme-morning': '昨晚睡得好吗？我的朋友',
+  'theme-day': '毎日も一生懸命でした',
+  'theme-noon': '不吃午饭也可以',
+  'theme-afternoon': 'Let‘s have some tea.',
+  'theme-dusk': '今天你看到日落了吗？',
+  'theme-evening': '晚饭要吃七分饱',
+  'theme-night': 'zzzZZZZZ'
+};
+
+const WHITE_LOGO_THEMES = new Set(['theme-afternoon', 'theme-evening', 'theme-night']);
+
+export function resolveThemeByHour(hour) {
+  const hit = THEME_BOUNDS.find((item) => hour >= item.start && hour < item.end);
+  return hit ? hit.theme : 'theme-night';
 }
 
-export function getThemePreference() {
-  return localStorage.getItem(getStorageKey('theme')) || 'auto';
+export function getCurrentTheme(now = new Date()) {
+  return resolveThemeByHour(now.getHours());
 }
 
-export function setThemePreference(themeId) {
-  localStorage.setItem(getStorageKey('theme'), themeId || 'auto');
+export function applyThemeClass(theme) {
+  if (!theme) return;
+  document.body.classList.add(theme);
+  document.documentElement.classList.add(theme);
 }
 
-export function resolveTheme(now = new Date()) {
-  const pref = getThemePreference();
-  if (pref !== 'auto') {
-    const manual = THEMES.find((item) => item.id === pref);
-    if (manual) {
-      return manual;
-    }
+export function applyThemeContent(theme) {
+  const logo = document.querySelector('.logo');
+  const greeting = document.querySelector('.greeting-text');
+  const subtitle = document.querySelector('.subtitle');
+
+  if (logo) {
+    logo.src = WHITE_LOGO_THEMES.has(theme)
+      ? 'assets/ScottShrimpICO_white.png'
+      : 'assets/ScottShrimpICO.png';
   }
-  return themeFromHour(now.getHours());
+
+  if (greeting) {
+    greeting.textContent = GREETINGS_BY_THEME[theme] || 'Greetings not loaded as expected_XD';
+  }
+
+  if (subtitle) {
+    subtitle.textContent = SUBTITLES_BY_THEME[theme] || 'Subtitles not loaded as expected_XD';
+  }
 }
 
-export function applyTheme({ now = new Date() } = {}) {
-  const theme = resolveTheme(now);
-  const root = document.documentElement;
-  const body = document.body;
-  root.dataset.theme = theme.id;
-  body.dataset.theme = theme.id;
+export function initThemeEngine() {
+  const theme = getCurrentTheme();
+  applyThemeClass(theme);
 
-  const greeting = document.querySelector('.js-greeting');
-  const subtitle = document.querySelector('.js-subtitle');
-  const period = document.querySelector('.js-period');
-
-  if (greeting) greeting.textContent = theme.greeting;
-  if (subtitle) subtitle.textContent = theme.subtitle;
-  if (period) period.textContent = theme.label;
+  window.addEventListener('DOMContentLoaded', () => {
+    applyThemeContent(theme);
+  });
 
   return theme;
-}
-
-export function listThemes() {
-  return THEMES.map(({ id, label }) => ({ id, label }));
 }
